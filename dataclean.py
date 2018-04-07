@@ -10,6 +10,7 @@ header = filetoread.readline()
 filetowrite.write(header)
 jobids = range(0,1090000)
 times = [[] for i in range(len(jobids))]
+startdates = [[] for i in range(len(jobids))]
 lines = ['']*len(jobids)
 linestodo = 0
 linesread = 0
@@ -28,6 +29,7 @@ for line in filetoread:
         timesincestart = float(date) - float(earliestdate)
         if(timesincestart/(60*60*24) < float(timesofar)):
                 continue
+        startdate = float(date) - 60*60*24*float(timesofar)
         splitline[inputfromr] = date
         edrecs = splitline[-4]
         if(edrecs == 'None'):
@@ -50,6 +52,7 @@ for line in filetoread:
         if (len(lines[jobid])==0):
                 times[jobid].append(timesofar)
                 lines[jobid]=splitline
+                startdates[jobid] = startdate
                 linestodo+=1
         else:
                 times[jobid].append(timesofar)
@@ -64,9 +67,12 @@ for idx in range(len(jobids)):
                 for i in range(maxtime):
                         if(not (i in times[idx])):
                                 strtoedit = lines[idx]
+                                startdate = startdates[idx]
+                                currentdate = startdate + 60*60*24*i
                                 strtoedit[-3] = str(i)
                                 strtoedit[-2] = '0'
                                 strtoedit[-1] = '0'
+                                strtoedit[inputfromr] = str(currentdate)
                                 writestr = ','.join(strtoedit)+'\n'
                                 filetowrite.write(writestr)
 filetoread.close()
