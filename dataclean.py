@@ -64,8 +64,6 @@ for idx in range(len(jobids)):
                 for i in range(maxtime):
                         if(not (i in times[idx])):
                                 strtoedit = lines[idx]
-                                print(times[idx])
-                                print(strtoedit)
                                 strtoedit[-3] = str(i)
                                 strtoedit[-2] = '0'
                                 strtoedit[-1] = '0'
