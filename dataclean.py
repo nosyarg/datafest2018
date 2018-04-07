@@ -9,7 +9,7 @@ filetowrite = open("/Users/grayson/desktop/datafest/finalwritefile.csv","w")
 header = filetoread.readline()
 filetowrite.write(header)
 jobids = range(0,1090000)
-times = [[]]*len(jobids)
+times = [[] for i in range(len(jobids))]
 lines = ['']*len(jobids)
 linestodo = 0
 linesread = 0
@@ -47,7 +47,7 @@ for line in filetoread:
         splitline[2+inputfromr] = str(jobid)
         splitline[1+inputfromr] = str(cid)
         filetowrite.write(','.join(splitline))
-        if (lines[jobid]==''):
+        if (len(lines[jobid])==0):
                 times[jobid].append(timesofar)
                 lines[jobid]=splitline
                 linestodo+=1
@@ -55,7 +55,7 @@ for line in filetoread:
                 times[jobid].append(timesofar)
 linesdone = 0
 for idx in range(len(jobids)):
-        if (linesdone%10000==0):
+        if (linesdone%1000==0):
                 print('writing')
                 print(linesdone/linestodo)
         linesdone+=1
@@ -64,6 +64,8 @@ for idx in range(len(jobids)):
                 for i in range(maxtime):
                         if(not (i in times[idx])):
                                 strtoedit = lines[idx]
+                                print(times[idx])
+                                print(strtoedit)
                                 strtoedit[-3] = str(i)
                                 strtoedit[-2] = '0'
                                 strtoedit[-1] = '0'
