@@ -72,6 +72,8 @@ for idx in range(len(jobids)):
                                 strtoedit[-3] = str(i)
                                 strtoedit[-2] = '0'
                                 strtoedit[-1] = '0'
+                                while(len(strtoedit)>23):
+                                        del strtoedit[9]
                                 strtoedit[inputfromr] = str(currentdate)
                                 writestr = ','.join(strtoedit)+'\n'
                                 filetowrite.write(writestr)

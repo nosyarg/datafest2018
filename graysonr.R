@@ -1,6 +1,6 @@
 setwd("/Users/grayson/Desktop/datafest")
 #rm(list = ls())
-#alldata <- read.csv("datafest2018.csv")
+#alldata <- read.csv("finalwritefile.csv")
 slicevector <- runif(nrow(alldata)) > .999
 slicedata <- alldata[slicevector,]
 clicknums <- c()
