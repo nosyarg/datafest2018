@@ -48,6 +48,8 @@ for line in filetoread:
         cid = int(cid)
         splitline[2+inputfromr] = str(jobid)
         splitline[1+inputfromr] = str(cid)
+        while(len(splitline)>23):
+                del splitline[9]
         filetowrite.write(','.join(splitline))
         if (len(lines[jobid])==0):
                 times[jobid].append(timesofar)
@@ -72,8 +74,6 @@ for idx in range(len(jobids)):
                                 strtoedit[-3] = str(i)
                                 strtoedit[-2] = '0'
                                 strtoedit[-1] = '0'
-                                while(len(strtoedit)>23):
-                                        del strtoedit[9]
                                 strtoedit[inputfromr] = str(currentdate)
                                 writestr = ','.join(strtoedit)+'\n'
                                 filetowrite.write(writestr)
